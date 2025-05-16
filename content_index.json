@@ -1,0 +1,30 @@
+{
+  "asthma": {
+    "title": "Asthma Education",
+    "filename": "asthma.md",
+    "icd10": ["J45"],
+    "snomed": ["195967001"],
+    "tags": ["chronic", "respiratory"],
+    "language": "en",
+    "grade_level": 6
+  },
+  "diabetes": {
+    "title": "Diabetes Discharge Instructions",
+    "filename": "diabetes.md",
+    "es_filename": "diabetes.es.md",
+    "icd10": ["E11", "E10"],
+    "snomed": ["44054006"],
+    "tags": ["chronic", "adult"],
+    "language": "en",
+    "grade_level": 6
+  },
+  "hypertension": {
+    "title": "Managing High Blood Pressure",
+    "filename": "hypertension.md",
+    "icd10": ["I10"],
+    "snomed": ["59621000"],
+    "tags": ["chronic", "cardiac"],
+    "language": "en",
+    "grade_level": 6
+  }
+}
