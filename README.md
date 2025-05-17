@@ -1,73 +1,86 @@
-# fhir-cds-tool
+# SMART-on-FHIR Health Literacy CDS Tool (Archived v1)
 
-This is a clinical decision support (CDS) tool designed to integrate with EHRs via SMART on FHIR.
+**Status:** Archived – Portfolio Project  
+**Repo:** [smart-cds-health-literacy](https://github.com/linbauer/smart-cds-health-literacy)  
+**Tags:** `#cds` `#fhir` `#python` `#health-literacy` `#informatics` `#equity`  
 
-## Structure
+---
 
-- `backend/` – FastAPI app to generate plain-language discharge materials
-- `frontend/` – UI (React, or HTML/CSS if simpler)
-- `scripts/` – helper CLI scripts (setup, seed, test)
-- `public/` – static resources (PDFs, icons)
-- `tests/` – unit/integration tests
+## 📋 Summary
 
-## Goals
+This project is a nurse-led clinical decision support (CDS) prototype designed to deliver plain-language, health-literate discharge instructions for chronic conditions (asthma, diabetes, hypertension) using **SMART-on-FHIR** principles. Built with **FastAPI**, the tool was designed to integrate with Epic/Cerner EHRs and explore how CDS systems can address **health literacy and equity gaps** in emergency department (ED) care.
 
-- Deliver health-literate summaries (≤ 6th grade)
-- Integrate with Epic/Cerner workflows
-- Export multilingual discharge PDFs
+The work represents a **completed learning milestone** and is no longer under active development. The codebase remains available as a portfolio artifact and potential foundation for future CDS prototypes.
 
-## Running Locally
+---
 
-1. Activate your virtual environment:
-   ```bash
-   source fhir_env/bin/activate
-2. Run the app: 
-   ```bash
-   python3 scripts/run.py
-3. Open your browser or use curl to visit:
-   http://127.0.0.1:8000/health
-   http://127.0.0.1:8000/patients
-   http://127.0.0.1:8000/patients/{id}
+## ✅ Features Completed
 
-## Search Example
+- 📘 `/education` endpoint serves plain-language Markdown content
+- 🧠 Alias resolution for lay terms like `"sugar disease"` → `diabetes.md`
+- 🌐 Planned localization via `Accept-Language` header (scaffolded)
+- 🔎 `/patients` and `/search` endpoints scaffolded for future FHIR work
+- 🧪 Unit tests for core endpoints (`education`, `normalize`)
+- 📂 Organized modular backend: `routers`, `schemas`, `services`, `utils`
 
-To search by name and/or birthDate:
+---
 
-```bash
-curl "http://127.0.0.1:8000/search?name=Somawathi"
-curl "http://127.0.0.1:8000/search?name=John&birthDate=1980-04-15"
+## 🚧 Features Planned but Not Implemented
 
-### `/education` Endpoint
+- [ ] Live SMART-on-FHIR authentication and token context
+- [ ] Real patient data from EHR (currently mocked)
+- [ ] PDF export and multilingual fallback logic
+- [ ] Frontend interface or embedded EHR iFrame
+- [ ] Clinician-facing selection UI for common discharge topics
 
-Returns plain-language educational content for a medical condition.
+---
 
-- ✅ Accepts a `condition` query parameter (`min_length=3`)
-- ✅ Loads Markdown files from `test_education_content/`
-- ✅ Returns plain text (Markdown-formatted) responses
-- ✅ Supports natural language aliases:
-  - `"high blood pressure"` → `hypertension.md`
-  - `"sugar disease"` → `diabetes.md`
-  - `"reactive airway"` → `asthma.md`
-
-#### 📎 Example Requests
+## 💻 Run the Project Locally
 
 ```bash
-curl "http://127.0.0.1:8000/education?condition=asthma"
-curl "http://127.0.0.1:8000/education?condition=high%20blood%20pressure"
+# Create and activate virtual environment
+python3 -m venv fhir_env
+source fhir_env/bin/activate
 
-# Asthma Education
+# Install dependencies
+pip install -r requirements.txt
 
-- Use your inhaler as prescribed.
-- Avoid smoke, dust, and cold air.
-- Follow up with your doctor within 1 week.
+# Run the app
+python run.py
+Open in browser:
 
-#### 🌐 Language Support
+- [http://localhost:8000/education?condition=asthma](http://localhost:8000/education?condition=asthma)
+    
+- [http://localhost:8000/docs](http://localhost:8000/docs)
+    
 
-If a localized education file exists, it will be served automatically based on the `Accept-Language` header.
+---
 
-**Example:**
+## 🧠 Why This Project Matters
 
-```bash
-curl -H "Accept-Language: es" "http://127.0.0.1:8000/education?condition=diabetes"
+This CDS prototype was built to explore:
 
-This will return the content from diabetes.es.md if it exists. If not, the fallback is the default "filename" (e.g. diabetes.md).
+- How discharge education can be delivered in a way patients understand
+    
+- How to structure modular CDS tooling as a nurse without formal dev training
+    
+- How FHIR and health IT systems interact with clinical workflows
+    
+- How to prototype toward equity — not just tech completeness
+    
+
+---
+
+## 🧑‍⚕️ Author
+
+**Lindsay Bauer**  
+Emergency Department RN | Health Equity Advocate | Informatics Learner  
+Built this project to bridge frontline care with CDS development.
+
+---
+
+## 📄 License
+
+MIT License — free for educational use, not production-ready.
+
+---
